@@ -1,7 +1,5 @@
-import { hookstate } from "@hookstate/core";
-
-interface StateGlobal {
-  gender: string;
+export interface PersonType {
+  gender: "female" | "male";
   name: {
     title: string;
     first: string;
@@ -56,7 +54,3 @@ interface StateGlobal {
   };
   nat: string;
 }
-
-const StoreStateGlobal = hookstate<StateGlobal[] | undefined>(undefined);
-
-export default StoreStateGlobal;
