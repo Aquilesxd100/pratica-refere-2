@@ -1,0 +1,1 @@
+LINK_API: https://randomuser.me/api?results=10
