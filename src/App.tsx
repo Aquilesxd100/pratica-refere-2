@@ -1,5 +1,6 @@
 import React from "react";
+import RoutesApp from "./config/Router";
 
 export function App() {
-    return <h1>Hello world!</h1>;
-  }
+  return <RoutesApp />;
+}
