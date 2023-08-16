@@ -52,6 +52,10 @@ interface CriminalUpdateProps extends FormInfosType {
 const CriminalUpdateModal = (props: CriminalUpdateProps) => {
   const criminals = useGlobalStateCriminals();
 
+  const [currentCriminals, setCurrentCriminals] = useState<
+    Array<CriminalsDataType>
+  >([]);
+
   const { reset, control, handleSubmit } = useForm<FormInfosType>({
     defaultValues: {
       name: "",
@@ -65,11 +69,10 @@ const CriminalUpdateModal = (props: CriminalUpdateProps) => {
   });
 
   useEffect(() => {
-    if (props) {
-      setModalProps(styleModalProps.on);
-      reset(props);
-    }
-  }, [props]);
+    setModalProps(styleModalProps.on);
+    reset(props);
+    setCurrentCriminals(criminals.get() as any);
+  }, []);
 
   const [modalProps, setModalProps] = useState(styleModalProps.off);
 
@@ -93,7 +96,9 @@ const CriminalUpdateModal = (props: CriminalUpdateProps) => {
       }
       return criminal;
     });
-    criminals.set(currentCriminals as any);
+    console.log("alterado:", currentCriminals);
+    criminals.set(updatedCriminalsList as any);
+    reset();
   };
 
   return (

@@ -38,9 +38,6 @@ const MainCriminals = () => {
         {criminals.get().map((criminal, index) => {
           return (
             <Box
-              onClick={() => {
-                updateModalHandler(criminal);
-              }}
               gridColumn="span 1"
               gridRow="span 2"
               key={criminal.name + index}
@@ -76,6 +73,9 @@ const MainCriminals = () => {
                     {TransformDangerLevel(criminal.dangerLevel)}
                   </Box>
                   <Box
+                    onClick={() => {
+                      updateModalHandler(criminal);
+                    }}
                     marginTop="10px"
                     width="50px"
                     height="30px"

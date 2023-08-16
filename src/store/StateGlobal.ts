@@ -32,7 +32,7 @@ const policesState = hookstate<Array<PoliceAuthenticationType>>([
 
 const wrapStateCriminals = (s: State<Array<CriminalsDataType>>) => ({
     get: () => s.value,
-    set: (list: Array<CriminalsDataType>) => s.set(list)
+    set: (list: Array<CriminalsDataType>) => s.set(list),
 })
 
 const wrapStatePolices = (s: State<Array<PoliceAuthenticationType>>) => ({
