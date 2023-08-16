@@ -1,20 +1,32 @@
-import { Box, Button, Typography } from "@mui/material";
-import React, { useState } from "react";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { Box, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const HeaderCriminals = () => {
-  const [logout, setLogout] = useState();
+  const [logout, setLogout] = useState<string | null>();
+  const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   setLogout(localStorage.getItem)
-  // }, [logout]);
+  useEffect(() => {
+    if (localStorage.getItem("policeOnline") !== "true") {
+      navigate("/");
+    }
+
+    setLogout(localStorage.getItem("policeOnline"));
+  }, [logout]);
+
+  const isLogout = () => {
+    localStorage.setItem("policeOnline", "false");
+    setLogout("false");
+  };
 
   return (
     <Box
-      height={"10vh"}
-      width={"100%"}
-      display={"flex"}
-      justifyContent={"center"}
-      alignItems={"center"}
+      height="10vh"
+      width="100%"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
       sx={{
         background: "linear-gradient(#aa2e59,#a30e29)",
       }}
@@ -23,13 +35,23 @@ const HeaderCriminals = () => {
         <strong>Dangerous Criminals</strong>
       </Typography>
 
-      <Button
-        variant="contained"
-        color="error"
-        sx={{ position: "absolute", top: "20px", right: "10px" }}
+      <Box
+        width="40px"
+        height="40px"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        borderRadius="50%"
+        position="absolute"
+        top="15px"
+        right="15px"
+        sx={{ cursor: "pointer", backgroundColor: "red" }}
+        onClick={() => {
+          isLogout();
+        }}
       >
-        Logout
-      </Button>
+        <LogoutIcon />
+      </Box>
     </Box>
   );
 };
