@@ -1,7 +1,13 @@
-import { Box, Typography } from "@mui/material";
-import React from "react";
+import { Box, Button, Typography } from "@mui/material";
+import React, { useState } from "react";
 
 const HeaderCriminals = () => {
+  const [logout, setLogout] = useState();
+
+  // useEffect(() => {
+  //   setLogout(localStorage.getItem)
+  // }, [logout]);
+
   return (
     <Box
       height={"10vh"}
@@ -16,6 +22,14 @@ const HeaderCriminals = () => {
       <Typography variant="h3">
         <strong>Dangerous Criminals</strong>
       </Typography>
+
+      <Button
+        variant="contained"
+        color="error"
+        sx={{ position: "absolute", top: "20px", right: "10px" }}
+      >
+        Logout
+      </Button>
     </Box>
   );
 };
