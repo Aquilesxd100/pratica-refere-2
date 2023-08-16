@@ -59,10 +59,8 @@ const CriminalUpdateModal = (props: CriminalUpdateProps) => {
 
   const updateHandler : SubmitHandler<FormInfosType> = (formValues: FormInfosType) => {
     console.log("original: ", currentCriminals)
-    const updatedCriminalsList =  currentCriminals.map((criminal: CriminalsDataType) => {
+    const updatedCriminalsList =  JSON.parse(JSON.stringify(currentCriminals)).map((criminal: CriminalsDataType) => {
       if (props.uuid === criminal.uuid) {
-        console.log(criminal.uuid)
-        console.log(props.uuid)
         return {
           uuid: criminal.uuid,
           name: formValues.name,
@@ -77,8 +75,9 @@ const CriminalUpdateModal = (props: CriminalUpdateProps) => {
       }
       return criminal;
     })
-    console.log("alterado:", currentCriminals)
-    criminals.set(updatedCriminalsList as any);
+    criminals.delete();
+    criminals.set([]);
+    criminals.update(updatedCriminalsList as any);
     reset();
   }
 
