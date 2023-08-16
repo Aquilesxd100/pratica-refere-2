@@ -1,7 +1,7 @@
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import { criminalsRequest } from "../pages/Criminals/requests/CriminalsRequest";
-import { useGlobalStateCriminals } from "../store/CriminalsData";
+import { useGlobalStateCriminals } from "../store/StateGlobal";
 import TransformDangerLevel from "../utils/TransformDangerLevel";
 
 const MainCriminals = () => {

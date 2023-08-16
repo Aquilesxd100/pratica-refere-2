@@ -1,5 +1,5 @@
 import { PersonType } from "../shared/types";
-import { CriminalsDataType } from "../store/CriminalsData";
+import { CriminalsDataType } from "../store/StateGlobal";
 
 const dangerLevels = ["High", "Medium", "Low"];
 const weapons = ["Knife", "Pistol", "Stick", "Axe", "Pipe", "Sword", "Shotgun", "Rifle", "Machete"];
