@@ -6,4 +6,5 @@ export const criminalsRequest = async () => {
                             .then((data: any) => data.results);
 
     return personProcessor(response);
+    
 };
