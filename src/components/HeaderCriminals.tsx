@@ -4,7 +4,7 @@ import React from "react";
 const HeaderCriminals = () => {
   return (
     <Box
-      height={"10%"}
+      height={"10vh"}
       width={"100%"}
       display={"flex"}
       justifyContent={"center"}
