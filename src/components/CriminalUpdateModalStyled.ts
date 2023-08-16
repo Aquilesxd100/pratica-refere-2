@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 
 export const ModalBackgroundStyled = styled(Box)({
     position: "absolute",
@@ -10,7 +10,7 @@ export const ModalBackgroundStyled = styled(Box)({
 });
 
 export const ModalBackgroundBlurStyled = styled(Box)({
-    position: "absolute",
+    position: "fixed",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -20,10 +20,8 @@ export const ModalBackgroundBlurStyled = styled(Box)({
     backdropFilter: "blur(3px)"
 });
 
-export const ModalBodyStyled = styled(Box)({
-    display: "flex",
-    flexxDirection: "column",
-    justifyContent: "center",
+export const ModalBodyStyled = styled(Grid)({
+    width: "50%",
     backgroundColor: "#DDDDDD",
     padding: "2% 5%",
     borderRadius: "7px",
