@@ -1,8 +1,8 @@
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { criminalsRequest } from "../pages/Criminals/requests/CriminalsRequest";
-import { useGlobalStateCriminals } from "../store/StateGlobal";
+import { CriminalsDataType, useGlobalStateCriminals } from "../store/StateGlobal";
 import TransformDangerLevel from "../utils/TransformDangerLevel";
 import CriminalUpdateModal from "./CriminalUpdateModal";
 
@@ -21,6 +21,12 @@ const MainCriminals = () => {
     getResult();
   }, []);
 
+  const [updateModalInfos, setUpdateModalInfos] = useState<CriminalsDataType>();
+
+  const updateModalHandler = (criminalInfos: CriminalsDataType) => {
+    setUpdateModalInfos(criminalInfos)
+  }
+
   return (
     <React.Fragment>
       <Box display={"flex"} maxWidth={"100%"}>
@@ -35,6 +41,7 @@ const MainCriminals = () => {
           {criminals.get().map((criminal, index) => {
             return (
               <Box
+                onClick={(() => { updateModalHandler(criminal) })}
                 gridColumn="span 1"
                 gridRow="span 2"
                 key={criminal.name + index}
@@ -70,7 +77,7 @@ const MainCriminals = () => {
           })}
         </Box>
       </Box>
-      <CriminalUpdateModal />
+      {updateModalInfos && <CriminalUpdateModal uuid={updateModalInfos.uuid} name={updateModalInfos.name} age={updateModalInfos.age} gender={updateModalInfos.gender} weapon={updateModalInfos.weapon} offense={updateModalInfos.offense} country={updateModalInfos.country} dangerLevel={updateModalInfos.dangerLevel}  />}
     </React.Fragment>
   );
 };
