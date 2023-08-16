@@ -1,5 +1,6 @@
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { criminalsRequest } from "../pages/Criminals/requests/CriminalsRequest";
 import { useGlobalStateCriminals } from "../store/StateGlobal";
 import TransformDangerLevel from "../utils/TransformDangerLevel";
@@ -7,8 +8,12 @@ import CriminalUpdateModal from "./CriminalUpdateModal";
 
 const MainCriminals = () => {
   const criminals = useGlobalStateCriminals();
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if (localStorage.getItem("policeOnline") !== "true") {
+      navigate("/");
+    }
     async function getResult() {
       const result = await criminalsRequest();
       criminals.set(result);

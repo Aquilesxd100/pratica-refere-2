@@ -10,44 +10,43 @@ import CancelIcon from '@mui/icons-material/Cancel';
   property: string;
 } */
 const styleModalProps = {
-    on: {
-        opacity: "1",
-        pointersEvents: "auto"
-    },
-    off: {
-        opacity: "0",
-        pointersEvents: "none" 
-    }
+  on: {
+    opacity: "1",
+    pointerEvents: "auto",
+  },
+  off: {
+    opacity: "0",
+    pointerEvents: "none",
+  },
 };
 
 interface FormInfosType {
-    name: string,
-    age: number,
-    gender: "female" | "male",
-    country: string,
-    weapon: string,
-    offense: string,
-    dangerLevel: "High" | "Medium" | "Low",
-};
-    
+  name: string;
+  age: number;
+  gender: "female" | "male";
+  country: string;
+  weapon: string;
+  offense: string;
+  dangerLevel: "High" | "Medium" | "Low";
+}
 
 const CriminalUpdateModal: React.FC = () => {
-    const { reset, control } = useForm<FormInfosType>({
-        defaultValues: {
-            name: "",
-            age: 0,
-            gender: "male",
-            country: "Brazil",
-            weapon: "Knife",
-            offense: "Assault",
-            dangerLevel: "Low",  
-        },
-    });
+  const { reset, control } = useForm<FormInfosType>({
+    defaultValues: {
+      name: "",
+      age: 0,
+      gender: "male",
+      country: "Brazil",
+      weapon: "Knife",
+      offense: "Assault",
+      dangerLevel: "Low",
+    },
+  });
 
-    const [modalProps, setModalProps] = useState(styleModalProps.on);
+  const [modalProps, setModalProps] = useState(styleModalProps.off);
 
   return (
-    <ModalBackgroundStyled style={modalProps}>
+    <ModalBackgroundStyled style={modalProps as any}>
         <ModalBackgroundBlurStyled component="form">
                 <ModalBodyStyled container spacing={2}>
                     <Grid item xs={6}>
