@@ -1,5 +1,6 @@
 import { State, hookstate, useHookstate } from "@hookstate/core";
 export interface CriminalsDataType {
+    uuid: string,
     name: string;
     age: number,
     gender: "female" | "male",
