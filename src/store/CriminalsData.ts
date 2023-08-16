@@ -1,10 +1,7 @@
 import { State, hookstate, useHookstate } from "@hookstate/core";
 
 export interface CriminalsDataType {
-    name: {
-        first: string;
-        last: string;
-    };
+    name: string,
     age: number,
     gender: "female" | "male",
     country: string,
