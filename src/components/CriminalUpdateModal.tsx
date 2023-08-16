@@ -1,11 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import { ModalBackgroundStyled, ModalBackgroundBlurStyled, ModalBodyStyled } from './CriminalUpdateModalStyled';
-import { Autocomplete, Box, Button, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, TextField } from '@mui/material';
+import CancelIcon from "@mui/icons-material/Cancel";
+import SendIcon from "@mui/icons-material/Send";
+import {
+  Autocomplete,
+  Box,
+  Button,
+  FormControlLabel,
+  FormLabel,
+  Grid,
+  Radio,
+  RadioGroup,
+  TextField,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { dangerLevels, offenses, weapons } from '../utils/personProcessor';
-import SendIcon from '@mui/icons-material/Send';
-import CancelIcon from '@mui/icons-material/Cancel';
-import { CriminalsDataType, useGlobalStateCriminals } from '../store/StateGlobal';
+import {
+  CriminalsDataType,
+  useGlobalStateCriminals,
+} from "../store/StateGlobal";
+import { dangerLevels, offenses, weapons } from "../utils/personProcessor";
+import {
+  ModalBackgroundBlurStyled,
+  ModalBackgroundStyled,
+  ModalBodyStyled,
+} from "./CriminalUpdateModalStyled";
 
 const styleModalProps = {
   on: {
@@ -51,15 +68,17 @@ const CriminalUpdateModal = (props: CriminalUpdateProps) => {
     if (props) {
       setModalProps(styleModalProps.on);
       reset(props);
-    }    
-  }, [props])
+    }
+  }, [props]);
 
-  const [modalProps, setModalProps] = useState(styleModalProps.on);
+  const [modalProps, setModalProps] = useState(styleModalProps.off);
 
-  const updateHandler : SubmitHandler<FormInfosType> = (formValues: FormInfosType) => {
+  const updateHandler: SubmitHandler<FormInfosType> = (
+    formValues: FormInfosType
+  ) => {
     let currentCriminals = criminals.get();
     currentCriminals = currentCriminals.map((criminal: CriminalsDataType) => {
-      if (props.uuid = criminal.uuid) {
+      if ((props.uuid = criminal.uuid)) {
         return {
           uuid: criminal.uuid,
           name: formValues.name,
@@ -69,94 +88,186 @@ const CriminalUpdateModal = (props: CriminalUpdateProps) => {
           weapon: formValues.weapon,
           offense: formValues.offense,
           dangerLevel: formValues.dangerLevel,
-          img: criminal.img
-        }
+          img: criminal.img,
+        };
       }
       return criminal;
-    })
+    });
     criminals.set(currentCriminals as any);
-  }
+  };
 
   return (
     <ModalBackgroundStyled style={modalProps as any}>
-        <ModalBackgroundBlurStyled component="form" onSubmit={handleSubmit(updateHandler)}>
-                <ModalBodyStyled container spacing={2}>
-                    <Grid item xs={6}>
-                        <Controller control={control}  name="name" render={({ field }) => (
-                                <TextField fullWidth {...field} label="Name" variant="outlined" />
-                        )} />
-                    </Grid>
+      <ModalBackgroundBlurStyled
+        component="form"
+        onSubmit={handleSubmit(updateHandler)}
+      >
+        <ModalBodyStyled container spacing={2}>
+          <Grid item xs={6}>
+            <Controller
+              control={control}
+              name="name"
+              render={({ field }) => (
+                <TextField
+                  fullWidth
+                  {...field}
+                  label="Name"
+                  variant="outlined"
+                />
+              )}
+            />
+          </Grid>
 
-                    <Grid item xs={6}>
-                        <Controller control={control} name="age" render={({ field }) => (
-                                <TextField fullWidth {...field} type="number" label="Age" variant="outlined" />
-                        )} />
-                    </Grid>
+          <Grid item xs={6}>
+            <Controller
+              control={control}
+              name="age"
+              render={({ field }) => (
+                <TextField
+                  fullWidth
+                  {...field}
+                  type="number"
+                  label="Age"
+                  variant="outlined"
+                />
+              )}
+            />
+          </Grid>
 
-                    <Grid item xs={6}>
-                        <Controller control={control} name="country" render={({ field }) => (
-                                <TextField fullWidth {...field} label="Country" variant="outlined" />
-                            )} /> 
-                    </Grid>
+          <Grid item xs={6}>
+            <Controller
+              control={control}
+              name="country"
+              render={({ field }) => (
+                <TextField
+                  fullWidth
+                  {...field}
+                  label="Country"
+                  variant="outlined"
+                />
+              )}
+            />
+          </Grid>
 
-                    <Grid item xs={6}>
-                        <Controller control={control} name="dangerLevel" render={({ field }) => (
-                            <Autocomplete
-                            onChange={((e, value: string | null) => {field.onChange(value)})}
-                            disablePortal
-                            options={dangerLevels}
-                            renderInput={(params) => <TextField {...params} {...params} label="Danger Level" />}
-                          />
-                            )} />    
-                    </Grid>
+          <Grid item xs={6}>
+            <Controller
+              control={control}
+              name="dangerLevel"
+              render={({ field }) => (
+                <Autocomplete
+                  onChange={(e, value: string | null) => {
+                    field.onChange(value);
+                  }}
+                  disablePortal
+                  options={dangerLevels}
+                  renderInput={(params) => (
+                    <TextField {...params} {...params} label="Danger Level" />
+                  )}
+                />
+              )}
+            />
+          </Grid>
 
-                    <Grid item xs={6}>
-                        <Controller control={control} name="weapon" render={({ field }) => (
-                            <Autocomplete
-                            onChange={((e, value: string | null) => {field.onChange(value)})}
-                            disablePortal
-                            options={weapons}
-                            renderInput={(params) => <TextField {...params} {...params} label="Weapon" />}
-                          />
-                            )} />    
-                    </Grid>
+          <Grid item xs={6}>
+            <Controller
+              control={control}
+              name="weapon"
+              render={({ field }) => (
+                <Autocomplete
+                  onChange={(e, value: string | null) => {
+                    field.onChange(value);
+                  }}
+                  disablePortal
+                  options={weapons}
+                  renderInput={(params) => (
+                    <TextField {...params} {...params} label="Weapon" />
+                  )}
+                />
+              )}
+            />
+          </Grid>
 
-                    <Grid item xs={6}>
-                        <Controller control={control} name="offense" render={({ field }) => (
-                            <Autocomplete
-                            onChange={((e, value: string | null) => {field.onChange(value)})}
-                            disablePortal
-                            options={offenses}
-                            renderInput={(params) => <TextField {...params} label="Offense" />}
-                          />
-                            )} />    
-                    </Grid>
+          <Grid item xs={6}>
+            <Controller
+              control={control}
+              name="offense"
+              render={({ field }) => (
+                <Autocomplete
+                  onChange={(e, value: string | null) => {
+                    field.onChange(value);
+                  }}
+                  disablePortal
+                  options={offenses}
+                  renderInput={(params) => (
+                    <TextField {...params} label="Offense" />
+                  )}
+                />
+              )}
+            />
+          </Grid>
 
-                    <Grid item xs={12}>
-                        <Controller control={control} name="gender" render={({ field }) => (
-                                <Box display="flex" flexDirection="column" alignItems="center">
-                                    <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
-                                    <RadioGroup {...field} row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group">
-                                        <FormControlLabel value="female" control={<Radio />} label="Female" />
-                                        <FormControlLabel value="male" control={<Radio />} label="Male" />
-                                    </RadioGroup>
-                                </Box>
-                            )} />   
-                    </Grid>    
-                    <Grid item xs={12} spacing={4} container justifyContent="center">
-                        <Grid item xs={5}>
-                          <Button type="submit" onClick={(() => { setModalProps(styleModalProps.off) })} fullWidth variant="contained" color="success" endIcon={<SendIcon />}>
-                              Update
-                          </Button>
-                        </Grid>
-                        <Grid item xs={5}>
-                          <Button onClick={(() => { setModalProps(styleModalProps.off); reset(); })} fullWidth variant="contained" color="error" endIcon={<CancelIcon />}>
-                            Cancel
-                          </Button>
-                        </Grid>  
-                    </Grid>              
-                </ModalBodyStyled>            
-        </ModalBackgroundBlurStyled>
+          <Grid item xs={12}>
+            <Controller
+              control={control}
+              name="gender"
+              render={({ field }) => (
+                <Box display="flex" flexDirection="column" alignItems="center">
+                  <FormLabel id="demo-row-radio-buttons-group-label">
+                    Gender
+                  </FormLabel>
+                  <RadioGroup
+                    {...field}
+                    row
+                    aria-labelledby="demo-row-radio-buttons-group-label"
+                    name="row-radio-buttons-group"
+                  >
+                    <FormControlLabel
+                      value="female"
+                      control={<Radio />}
+                      label="Female"
+                    />
+                    <FormControlLabel
+                      value="male"
+                      control={<Radio />}
+                      label="Male"
+                    />
+                  </RadioGroup>
+                </Box>
+              )}
+            />
+          </Grid>
+          <Grid item xs={12} spacing={4} container justifyContent="center">
+            <Grid item xs={5}>
+              <Button
+                type="submit"
+                onClick={() => {
+                  setModalProps(styleModalProps.off);
+                }}
+                fullWidth
+                variant="contained"
+                color="success"
+                endIcon={<SendIcon />}
+              >
+                Update
+              </Button>
+            </Grid>
+            <Grid item xs={5}>
+              <Button
+                onClick={() => {
+                  setModalProps(styleModalProps.off);
+                  reset();
+                }}
+                fullWidth
+                variant="contained"
+                color="error"
+                endIcon={<CancelIcon />}
+              >
+                Cancel
+              </Button>
+            </Grid>
+          </Grid>
+        </ModalBodyStyled>
+      </ModalBackgroundBlurStyled>
     </ModalBackgroundStyled>
   );
 };

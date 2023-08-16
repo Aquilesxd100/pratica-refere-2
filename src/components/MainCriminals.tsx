@@ -2,8 +2,11 @@ import DriveFileRenameOutlineIcon from "@mui/icons-material/DriveFileRenameOutli
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { criminalsRequest } from "../pages/Criminals/requests/CriminalsRequest";
-import { CriminalsDataType, useGlobalStateCriminals } from "../store/StateGlobal";
-import TransformDangerLevel from "../utils/TransformDangerLevel";
+import TransformDangerLevel from "../pages/Criminals/utils/TransformDangerLevel";
+import {
+  CriminalsDataType,
+  useGlobalStateCriminals,
+} from "../store/StateGlobal";
 import CriminalUpdateModal from "./CriminalUpdateModal";
 const MainCriminals = () => {
   const criminals = useGlobalStateCriminals();
@@ -19,8 +22,8 @@ const MainCriminals = () => {
   const [updateModalInfos, setUpdateModalInfos] = useState<CriminalsDataType>();
 
   const updateModalHandler = (criminalInfos: CriminalsDataType) => {
-    setUpdateModalInfos(criminalInfos)
-  }
+    setUpdateModalInfos(criminalInfos);
+  };
 
   return (
     <React.Fragment>
@@ -35,7 +38,9 @@ const MainCriminals = () => {
         {criminals.get().map((criminal, index) => {
           return (
             <Box
-                onClick={(() => { updateModalHandler(criminal) })}
+              onClick={() => {
+                updateModalHandler(criminal);
+              }}
               gridColumn="span 1"
               gridRow="span 2"
               key={criminal.name + index}
@@ -95,7 +100,18 @@ const MainCriminals = () => {
           );
         })}
       </Box>
-      {updateModalInfos && <CriminalUpdateModal uuid={updateModalInfos.uuid} name={updateModalInfos.name} age={updateModalInfos.age} gender={updateModalInfos.gender} weapon={updateModalInfos.weapon} offense={updateModalInfos.offense} country={updateModalInfos.country} dangerLevel={updateModalInfos.dangerLevel}  />}
+      {updateModalInfos && (
+        <CriminalUpdateModal
+          uuid={updateModalInfos.uuid}
+          name={updateModalInfos.name}
+          age={updateModalInfos.age}
+          gender={updateModalInfos.gender}
+          weapon={updateModalInfos.weapon}
+          offense={updateModalInfos.offense}
+          country={updateModalInfos.country}
+          dangerLevel={updateModalInfos.dangerLevel}
+        />
+      )}
     </React.Fragment>
   );
 };
