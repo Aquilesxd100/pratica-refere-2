@@ -8,7 +8,7 @@ const TransformDangerLevel = (dangerLevel: string) => {
       <Box display={"flex"} gap={0.2}>
         <Avatar
           sx={{
-            backgroundColor: "red",
+            backgroundColor: "#e57157",
             width: 24,
             height: 24,
           }}
@@ -17,7 +17,7 @@ const TransformDangerLevel = (dangerLevel: string) => {
         </Avatar>
         <Avatar
           sx={{
-            backgroundColor: "red",
+            backgroundColor: "#e57157",
             width: 24,
             height: 24,
           }}
@@ -26,7 +26,7 @@ const TransformDangerLevel = (dangerLevel: string) => {
         </Avatar>
         <Avatar
           sx={{
-            backgroundColor: "red",
+            backgroundColor: "#e57157",
             width: 24,
             height: 24,
           }}
@@ -42,7 +42,7 @@ const TransformDangerLevel = (dangerLevel: string) => {
       <Box display={"flex"} gap={0.2}>
         <Avatar
           sx={{
-            backgroundColor: "#ffe600",
+            backgroundColor: "#f7e540",
             width: 24,
             height: 24,
           }}
@@ -51,7 +51,7 @@ const TransformDangerLevel = (dangerLevel: string) => {
         </Avatar>
         <Avatar
           sx={{
-            backgroundColor: "#ffe600",
+            backgroundColor: "#f7e540",
             width: 24,
             height: 24,
           }}
