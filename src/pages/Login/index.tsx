@@ -3,12 +3,17 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import React from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import ReactInputMask from "react-input-mask";
+import { useNavigate } from "react-router-dom";
+import { useGlobalStatePolices } from "../../store/StateGlobal";
 import {
   FormPoliceAuthentication,
   SchemaPoliceValidation,
 } from "./utils/validation";
 
 const Login = () => {
+  const polices = useGlobalStatePolices();
+  const navigate = useNavigate();
+
   const EmpityLogin: any = {
     firstName: "",
     secondName: "",
@@ -27,7 +32,20 @@ const Login = () => {
   });
 
   const onSubmit: SubmitHandler<FormPoliceAuthentication> = (values) => {
-    console.log(values);
+    const findPolice = polices.get().some((item) => {
+      return (
+        item.firstName === values.firstName &&
+        item.secondName === values.secondName &&
+        item.identificationNumber === values.identificationNumber &&
+        item.registrationDate === values.registrationDate
+      );
+    });
+
+    if (findPolice) {
+      localStorage.setItem("policeOnline", "true");
+      navigate("/criminals");
+    }
+
     reset();
   };
 
@@ -123,7 +141,7 @@ const Login = () => {
                 control={control}
                 name="registrationDate"
                 render={({ field }) => (
-                  <ReactInputMask mask="99/99/9999" maskChar="_" {...field}>
+                  <ReactInputMask mask="99/99/9999" maskChar={null} {...field}>
                     {/* @ts-ignore */}
                     {() => (
                       <TextField
