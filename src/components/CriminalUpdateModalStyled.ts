@@ -18,11 +18,14 @@ export const ModalBackgroundBlurStyled = styled(Box)({
     height: "100%",
     backgroundColor: "rgba(0, 0, 0, 0.4)",
     backdropFilter: "blur(3px)"
-})
+});
 
 export const ModalBodyStyled = styled(Box)({
-    backgroundColor: "#a30e29",
+    display: "flex",
+    flexxDirection: "column",
+    justifyContent: "center",
+    backgroundColor: "#DDDDDD",
     padding: "2% 5%",
     borderRadius: "7px",
-    border: "solid 4px #560716"
-})
+    border: "solid 4px #560716",
+});
