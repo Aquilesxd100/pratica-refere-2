@@ -1,7 +1,20 @@
-import { Box } from "@mui/material";
-import React from "react";
+import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
+import React, { useEffect } from "react";
+import { criminalsRequest } from "../pages/Criminals/requests/CriminalsRequest";
+import { useGlobalState } from "../store/CriminalsData";
+import TransformDangerLevel from "../utils/TransformDangerLevel";
 
 const MainCriminals = () => {
+  const criminals = useGlobalState();
+
+  useEffect(() => {
+    async function getResult() {
+      const result = await criminalsRequest();
+      criminals.set(result);
+    }
+    getResult();
+  }, []);
+
   return (
     <React.Fragment>
       <Box
@@ -10,29 +23,42 @@ const MainCriminals = () => {
         gridTemplateColumns="repeat(5, 1fr)"
         gap={2}
       >
-        {/* {Dataa.map((criminals) => {
-          return (
-            <Box height="100%" gridColumn="span 1" gridRow="span 2">
-              <Card sx={{ width: "100%" }}>
-                <CardMedia
-                  sx={{ height: 130 }}
-                  image={criminals.picture.large}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    {criminals.name.first}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {criminals.gender}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {criminals.location.country}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Box>
-          );
-        })} */}
+        {criminals.get() ? (
+          criminals.get().map((criminal, index) => {
+            return (
+              <Box
+                height="100%"
+                gridColumn="span 1"
+                gridRow="span 2"
+                key={criminal.name.first + index}
+              >
+                <Card sx={{ width: "100%" }}>
+                  <CardMedia sx={{ height: 120 }} image={criminal.img} />
+                  <CardContent>
+                    <Typography gutterBottom variant="h6" component="div">
+                      {criminal.name.first + " " + criminal.name.last}
+                    </Typography>
+
+                    <Typography variant="body2" color="text.secondary">
+                      {criminal.country}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {criminal.weapon}
+                    </Typography>
+                    <Box display={"flex"} alignItems={"center"} gap={0.5}>
+                      <Typography variant="body2" color="text.secondary">
+                        Danget level:
+                      </Typography>
+                      {TransformDangerLevel(criminal.dangerLevel)}
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Box>
+            );
+          })
+        ) : (
+          <p>Não deu n</p>
+        )}
       </Box>
     </React.Fragment>
   );
