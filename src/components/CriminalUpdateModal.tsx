@@ -35,6 +35,8 @@ interface CriminalUpdateProps extends FormInfosType {
 const CriminalUpdateModal = (props: CriminalUpdateProps) => {
   const criminals = useGlobalStateCriminals();
 
+  const [currentCriminals, setCurrentCriminals] = useState<Array<CriminalsDataType>>([]);
+
   const { reset, control, handleSubmit } = useForm<FormInfosType>({
     defaultValues: {
       name: "",
@@ -48,18 +50,19 @@ const CriminalUpdateModal = (props: CriminalUpdateProps) => {
   });
 
   useEffect(() => {
-    if (props) {
       setModalProps(styleModalProps.on);
       reset(props);
-    }    
-  }, [props])
+      setCurrentCriminals(criminals.get() as any)   
+  }, [])
 
-  const [modalProps, setModalProps] = useState(styleModalProps.on);
+  const [modalProps, setModalProps] = useState(styleModalProps.off);
 
   const updateHandler : SubmitHandler<FormInfosType> = (formValues: FormInfosType) => {
-    let currentCriminals = criminals.get();
-    currentCriminals = currentCriminals.map((criminal: CriminalsDataType) => {
-      if (props.uuid = criminal.uuid) {
+    console.log("original: ", currentCriminals)
+    const updatedCriminalsList =  currentCriminals.map((criminal: CriminalsDataType) => {
+      if (props.uuid === criminal.uuid) {
+        console.log(criminal.uuid)
+        console.log(props.uuid)
         return {
           uuid: criminal.uuid,
           name: formValues.name,
@@ -74,7 +77,9 @@ const CriminalUpdateModal = (props: CriminalUpdateProps) => {
       }
       return criminal;
     })
-    criminals.set(currentCriminals as any);
+    console.log("alterado:", currentCriminals)
+    criminals.set(updatedCriminalsList as any);
+    reset();
   }
 
   return (
