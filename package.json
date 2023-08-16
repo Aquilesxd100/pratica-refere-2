@@ -21,6 +21,6 @@
   },
   "scripts": {
     "dev": "npm run build && npx parcel ./src/index.html",
-    "build": "parcel build ./src/index.html"
+    "build": "parcel build --no-cache ./src/index.html"
   }
 }
