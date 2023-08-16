@@ -1,5 +1,5 @@
-import { PersonType } from "../shared/types"
-import { CriminalsDataType } from "../store/CriminalsData"
+import { PersonType } from "../shared/types";
+import { CriminalsDataType } from "../store/CriminalsData";
 
 const dangerLevels = ["High", "Medium", "Low"];
 const weapons = ["Knife", "Pistol", "Stick", "Axe", "Pipe", "Sword", "Shotgun", "Rifle", "Machete"];
@@ -9,7 +9,7 @@ export const personProcessor = (personList: Array<PersonType>) : Array<Criminals
     return personList.map((person : PersonType) => {
         const randomDangerLevel = dangerLevels[Math.floor(Math.random()*3)] as any;
         const randomWeapon = weapons[Math.floor(Math.random()*9)];
-        const randomOffense = offenses[Math.floor(Math.random()*9)];
+        const randomOffense = offenses[Math.floor(Math.random()*5)];
 
         return {
             name: {
@@ -21,7 +21,8 @@ export const personProcessor = (personList: Array<PersonType>) : Array<Criminals
             country: person.location.country,
             weapon: randomWeapon,
             offense: randomOffense,
-            dangerLevel: randomDangerLevel
+            dangerLevel: randomDangerLevel,
+            img:person.picture.large
         }
     })
 }

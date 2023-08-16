@@ -1,5 +1,4 @@
-import React from 'react';
-import { hookstate, useHookstate } from '@hookstate/core';
+import { State, hookstate, useHookstate } from "@hookstate/core";
 
 export interface CriminalsDataType {
     name: {
@@ -11,10 +10,17 @@ export interface CriminalsDataType {
     country: string,
     weapon: string,
     offense: string,
-    dangerLevel: "High" | "Medium" | "Low"
+    dangerLevel: "High" | "Medium" | "Low",
+    img:string
 };
 
-export const criminalsState = hookstate<Array<CriminalsDataType>>([]);
+const criminalsState = hookstate<Array<CriminalsDataType>>([]);
+
+const wrapState = (s: State<Array<CriminalsDataType>>) => ({
+    get: () => s.value,
+    set: (list: Array<CriminalsDataType>) => s.set(list)
+})
+export const useGlobalState = () => wrapState(useHookstate(criminalsState))
 
 
 
