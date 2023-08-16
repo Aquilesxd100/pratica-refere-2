@@ -7,6 +7,7 @@ export const ModalBackgroundStyled = styled(Box)({
     left: "0",
     minHeight: "100vh",
     width: "100%",
+    transition: "opacity 0.4s"
 });
 
 export const ModalBackgroundBlurStyled = styled(Box)({
@@ -22,7 +23,7 @@ export const ModalBackgroundBlurStyled = styled(Box)({
 
 export const ModalBodyStyled = styled(Grid)({
     width: "50%",
-    backgroundColor: "#DDDDDD",
+    backgroundColor: "#BEBEBE",
     padding: "2% 5%",
     borderRadius: "7px",
     border: "solid 4px #560716",
