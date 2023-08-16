@@ -31,13 +31,13 @@ const MainCriminals = () => {
                 height="100%"
                 gridColumn="span 1"
                 gridRow="span 2"
-                key={criminal.name.first + index}
+                key={criminal.name + index}
               >
                 <Card sx={{ width: "100%" }}>
                   <CardMedia sx={{ height: 120 }} image={criminal.img} />
                   <CardContent>
                     <Typography gutterBottom variant="h6" component="div">
-                      {criminal.name.first + " " + criminal.name.last}
+                      {criminal.name}
                     </Typography>
 
                     <Typography variant="body2" color="text.secondary">
