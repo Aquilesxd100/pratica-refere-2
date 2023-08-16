@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { criminalsRequest } from "../pages/Criminals/requests/CriminalsRequest";
 import { useGlobalState } from "../store/CriminalsData";
 import TransformDangerLevel from "../utils/TransformDangerLevel";
+import CriminalUpdateModal from "./CriminalUpdateModal";
 
 const MainCriminals = () => {
   const criminals = useGlobalState();
@@ -60,6 +61,7 @@ const MainCriminals = () => {
           <p>Não deu n</p>
         )}
       </Box>
+      <CriminalUpdateModal/>
     </React.Fragment>
   );
 };
