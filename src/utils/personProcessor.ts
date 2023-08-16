@@ -12,10 +12,7 @@ export const personProcessor = (personList: Array<PersonType>) : Array<Criminals
         const randomOffense = offenses[Math.floor(Math.random()*5)];
 
         return {
-            name: {
-                first: person.name.first,
-                last: person.name.last,
-            },
+            name: person.name.first + " " + person.name.last,
             age: person.dob.age,
             gender: person.gender,
             country: person.location.country,
