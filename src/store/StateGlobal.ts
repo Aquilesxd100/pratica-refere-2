@@ -11,7 +11,7 @@ export interface CriminalsDataType {
     img:string
 };
 
-export interface PoliceAuthentication{
+export interface PoliceAuthenticationType{
     firstName: string;
     secondName: string;
     identificationNumber: string;
@@ -20,17 +20,23 @@ export interface PoliceAuthentication{
 
 
 const criminalsState = hookstate<Array<CriminalsDataType>>([]);
+const policesState = hookstate<Array<PoliceAuthenticationType>>([])
 
-const wrapState = (s: State<Array<CriminalsDataType>>) => ({
+
+const wrapStateCriminals = (s: State<Array<CriminalsDataType>>) => ({
     get: () => s.value,
     set: (list: Array<CriminalsDataType>) => s.set(list)
 })
 
+const wrapStatePolices = (s: State<Array<PoliceAuthenticationType>>) => ({
+    get: () => s.value,
+    set: (list: Array<PoliceAuthenticationType>) => s.set(list)
+})
 
 
 
-export const useGlobalStateCriminals = () => wrapState(useHookstate(criminalsState))
-
+export const useGlobalStateCriminals = () => wrapStateCriminals(useHookstate(criminalsState))
+export const useGlobalStatePolices= () => wrapStateCriminals(useHookstate(criminalsState))
 
 
 
