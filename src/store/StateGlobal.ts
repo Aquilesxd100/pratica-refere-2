@@ -1,4 +1,4 @@
-import { State, hookstate, useHookstate } from "@hookstate/core";
+import { State, hookstate, none, useHookstate } from "@hookstate/core";
 export interface CriminalsDataType {
     uuid: string,
     name: string;
@@ -33,6 +33,8 @@ const policesState = hookstate<Array<PoliceAuthenticationType>>([
 const wrapStateCriminals = (s: State<Array<CriminalsDataType>>) => ({
     get: () => s.value,
     set: (list: Array<CriminalsDataType>) => s.set(list),
+    delete: () => s.set(none),
+    update: (list: Array<CriminalsDataType>) => s.merge(list),
 })
 
 const wrapStatePolices = (s: State<Array<PoliceAuthenticationType>>) => ({
