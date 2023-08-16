@@ -1,15 +1,34 @@
-import React from 'react';
-import { ModalBodyStyled } from './CriminalUpdateModalStyled';
+import React, { useState } from 'react';
+import { ModalBackgroundStyled, ModalBackgroundBlurStyled, ModalBodyStyled } from './CriminalUpdateModalStyled';
 
 /* interface CriminalUpdateModalProps {
   property: string;
 } */
+    const styleModalProps = {
+        on: {
+            opacity: "1",
+            pointersEvents: "auto"
+        },
+        off: {
+            opacity: "0",
+            pointersEvents: "none" 
+        }
+    }
+    
 
 const CriminalUpdateModal: React.FC = () => {
-  return (
-    <ModalBodyStyled>
+    const [modalProps, setModalProps] = useState(styleModalProps.on);
 
-    </ModalBodyStyled>
+  return (
+    <ModalBackgroundStyled style={modalProps}>
+        <ModalBackgroundBlurStyled>
+            <ModalBodyStyled>
+                <form>
+
+                </form>
+            </ModalBodyStyled>               
+        </ModalBackgroundBlurStyled>
+    </ModalBackgroundStyled>
   );
 };
 
