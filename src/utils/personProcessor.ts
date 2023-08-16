@@ -12,6 +12,7 @@ export const personProcessor = (personList: Array<PersonType>) : Array<Criminals
         const randomOffense = offenses[Math.floor(Math.random()*5)];
 
         return {
+            uuid: crypto.randomUUID(),
             name: person.name.first + " " + person.name.last,
             age: person.dob.age,
             gender: person.gender,
