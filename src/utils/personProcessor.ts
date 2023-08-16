@@ -1,9 +1,9 @@
 import { PersonType } from "../shared/types";
 import { CriminalsDataType } from "../store/StateGlobal";
 
-const dangerLevels = ["High", "Medium", "Low"];
-const weapons = ["Knife", "Pistol", "Stick", "Axe", "Pipe", "Sword", "Shotgun", "Rifle", "Machete"];
-const offenses = ["Assault", "Robbery", "Murder", "Kidnapping", "Domestic violence"];
+export const dangerLevels = ["High", "Medium", "Low"];
+export const weapons = ["Knife", "Pistol", "Stick", "Axe", "Pipe", "Sword", "Shotgun", "Rifle", "Machete"];
+export const offenses = ["Assault", "Robbery", "Murder", "Kidnapping", "Domestic violence"];
 
 export const personProcessor = (personList: Array<PersonType>) : Array<CriminalsDataType> => {
     return personList.map((person : PersonType) => {
